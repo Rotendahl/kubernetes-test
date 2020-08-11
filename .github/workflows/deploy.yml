@@ -7,8 +7,10 @@ jobs:
     name: build shit
     runs-on: ubuntu-latest
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
       - name: Creating test client image
-        run: docker build -t client_test -f client/Dockerfile.dev  ./client
+        run: docker build -t client_test -f client/Dockerfile.dev client
       - name: run client test
         run: docker run -e CI=true client_test npm test
       - name: Push client to docker hub

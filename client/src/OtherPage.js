@@ -1,10 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default () => {
   return (
     <div>
-      Du er på den anden side <Link to="/">Gå til forsiden igen</Link>
+      Im some other page
+      <Link to="/">Go back to home page!</Link>
     </div>
   );
 };

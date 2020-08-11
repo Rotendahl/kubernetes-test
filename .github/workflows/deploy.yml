@@ -23,6 +23,26 @@ jobs:
           repository: rotendahl/client
           tag_with_sha: true
           tag_with_ref: true
+      - name: Push server to docker hub
+        uses: docker/build-push-action@v1
+        with:
+          dockerfile: server/Dockerfile
+          path: server
+          username: "${{ secrets.docker_user }}"
+          password: "${{ secrets.docker_token }}"
+          repository: rotendahl/api
+          tag_with_sha: true
+          tag_with_ref: true
+      - name: Push worker to docker hub
+        uses: docker/build-push-action@v1
+        with:
+          dockerfile: worker/Dockerfile
+          path: worker
+          username: "${{ secrets.docker_user }}"
+          password: "${{ secrets.docker_token }}"
+          repository: rotendahl/worker
+          tag_with_sha: true
+          tag_with_ref: true
     # env:
     #   IMAGE_SIZE: 800
     #   GEO_KEY: ${{ secrets.GEO_KEY }}

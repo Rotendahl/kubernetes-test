@@ -8,13 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Creating test client image
-        run: docker build -t client_test -f client/Dockerfile.dev
+        run: docker build -t client_test -f client/Dockerfile.dev client
       - name: run client test
         run: docker run -e CI=true client_test npm test
       - name: Push client to docker hub
         uses: docker/build-push-action@v1
         with:
           dockerfile: client/Dockerfile
+          path: client
           username: "${{ secrets.docker_user }}"
           password: "${{ secrets.docker_token }}"
           repository: rotendahl/client

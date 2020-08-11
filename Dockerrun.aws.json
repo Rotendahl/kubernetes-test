@@ -6,11 +6,11 @@
       "image": "rotendahl/client",
       "hostname": "client",
       "essential": false,
-      "memory": 500
+      "memoryReservation": 5
     },
     {
       "name": "api",
-      "memory": 500,
+      "memoryReservation": 5,
       "image": "rotendahl/api",
       "hostname": "api",
       "essential": false,
@@ -37,7 +37,7 @@
     },
     {
       "name": "nginx",
-      "memory": 500,
+      "memoryReservation": 5,
       "image": "rotendahl/fib-nginx",
       "essential": true,
       "portMappings": [{ "hostPort": 80, "containerPort": "80" }],
@@ -57,7 +57,7 @@
       "name": "worker",
       "image": "rotendahl/worker",
       "essential": false,
-      "memory": 500,
+      "memoryReservation": 5,
       "links": ["redis", "postgres"],
       "environment": [
         { "name": "REDIS_HOST", "value": "redis" },
@@ -77,7 +77,7 @@
     {
       "name": "postgres",
       "image": "postgres:latest",
-      "memory": 500,
+      "memoryReservation": 5,
       "environment": [
         { "name": "POSTGRES_PASSWORD", "value": "postgres_password" }
       ]
@@ -85,7 +85,7 @@
     {
       "name": "redis",
       "image": "redis",
-      "memory": 500
+      "memoryReservation": 5
     }
   ]
 }

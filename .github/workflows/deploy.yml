@@ -43,6 +43,16 @@ jobs:
           repository: rotendahl/worker
           tag_with_sha: true
           tag_with_ref: true
+      - name: Push nginx to docker hub
+        uses: docker/build-push-action@v1
+        with:
+          dockerfile: nginx/Dockerfile
+          path: nginx
+          username: "${{ secrets.docker_user }}"
+          password: "${{ secrets.docker_token }}"
+          repository: rotendahl/fib-nginx
+          tag_with_sha: true
+          tag_with_ref: true
     # env:
     #   IMAGE_SIZE: 800
     #   GEO_KEY: ${{ secrets.GEO_KEY }}

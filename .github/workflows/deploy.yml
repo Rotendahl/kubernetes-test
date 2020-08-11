@@ -1,0 +1,80 @@
+name: Test code builds images and pushes to docker hub
+
+on: [push]
+
+jobs:
+  build:
+    name: build shit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Creating test client image
+        run: docker build -t client_test -f client/Dockerfile.dev
+      - name: run client test
+        run: docker run -e CI=true client_test npm test
+      - name: Push client to docker hub
+        uses: docker/build-push-action@v1
+        with:
+          dockerfile: client/Dockerfile
+          username: "${{ secrets.docker_user }}"
+          password: "${{ secrets.docker_token }}"
+          repository: rotendahl/client
+          tag_with_sha: true
+          tag_with_ref: true
+    # env:
+    #   IMAGE_SIZE: 800
+    #   GEO_KEY: ${{ secrets.GEO_KEY }}
+    #   KORTFORSYNINGEN: ${{ secrets.KORTFORSYNINGEN }}
+    # - name: Creating coverage
+    #   run: |
+    #     docker run \
+    #         -e KORTFORSYNINGEN -e GEO_KEY -e IMAGE_SIZE \
+    #         flood_risk pipenv run coverage run --source=. -m unittest
+    #
+    # - name: Uploading Coverage
+    #   run: |
+    #     docker run \
+    #         -e COVERALLS_REPO_TOKEN=${{ secrets.COVERALLS_REPO_TOKEN }}\
+    #         flood_risk pipenv run coveralls
+    #   env:
+    #     COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+#
+#       - name: Checking black
+#         run: docker run flood_risk pipenv run black --check .
+#       - name: Checking Flake8
+#         run: docker run flood_risk pipenv run flake8 --max-complexity 8 .
+# name: Runs deployment steps and analyses code
+# "on":
+#   push:
+#     branches:
+#       - master
+# jobs:
+#   push_to_dockerhub:
+#     name: Build and Push Docker image to dockerhub
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out the repo
+#         uses: actions/checkout@v2
+#       - name: Push to docker hub
+#         uses: docker/build-push-action@v1
+#         with:
+#           username: "${{ secrets.docker_user }}"
+#           password: "${{ secrets.docker_token }}"
+#           repository: rotendahl/flood_risk
+#           tag_with_sha: true
+#           tag_with_ref: true
+#
+#   push_to_github_packages:
+#     name: Push Docker image to GitHub Packages
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out the repo
+#         uses: actions/checkout@v2
+#       - name: Push to GitHub Packages
+#         uses: docker/build-push-action@v1
+#         with:
+#           username: ${{ github.actor }}
+#           password: ${{ secrets.GITHUB_TOKEN }}
+#           registry: docker.pkg.github.com
+#           repository: rotendahl/flood_risk/flood_risk
+#           tag_with_ref: true
+#           tag_with_sha: true

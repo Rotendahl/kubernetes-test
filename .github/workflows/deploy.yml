@@ -48,11 +48,3 @@ jobs:
           file: worker/Dockerfile
           push: true
           tags: ghcr.io/rotendahl/kubernetes-test/worker:latest
-
-      - name: Push Nginx to GH Reg
-        uses: docker/build-push-action@v2
-        with:
-          context: ./nginx
-          file: worker/Dockerfile
-          push: true
-          tags: ghcr.io/rotendahl/kubernetes-test/nginx:latest

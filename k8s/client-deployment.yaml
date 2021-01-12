@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: client
-          image: rotendahl/kuber_multi_client
+          image: ghcr.io/rotendahl/kubernetes-test/client
           ports:
             - containerPort: 3000

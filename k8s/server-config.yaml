@@ -15,7 +15,7 @@ spec:
       spec:
         containers:
           - name: server
-            image: rotendahl/kuber_multi_server
+            image: ghcr.io/rotendahl/kubernetes-test/server
             ports:
               - containerPort: 5000
             env:

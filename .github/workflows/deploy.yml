@@ -32,7 +32,7 @@ jobs:
           context: ./client
           file: client/Dockerfile
           push: true
-          tags: rotendahl/test_client:latest
+          tags: ghcr.io/rotendahl/test_client:latest
 
 
 

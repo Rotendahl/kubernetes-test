@@ -20,4 +20,4 @@ jobs:
           file: client/Dockerfile.dev
           tags: client_test
       - name: Run Tests
-        run: docker run -e CI=true client_test npm test
+        run: docker run -e CI=true client_test npm  test

@@ -1,4 +1,4 @@
-name: Test code builds images and pushes to docker hub
+name: Test code
 
 on: [pull_request]
 

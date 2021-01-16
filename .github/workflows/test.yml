@@ -1,0 +1,23 @@
+name: Test code builds images and pushes to docker hub
+
+on: [pull_request]
+
+jobs:
+  build:
+    name: Test shit
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build test image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./client
+          file: client/Dockerfile.dev
+          tags: client_test
+      - name: Run Tests
+        run: docker run -e CI=true client_test npm test
